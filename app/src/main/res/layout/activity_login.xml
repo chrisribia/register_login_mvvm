@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.LoginActivity">
+
+    <LinearLayout
+            android:layout_marginTop="150dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <EditText
+                android:id="@+id/mEmail"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="email"
+                android:inputType="textEmailAddress"
+        />
+        <EditText
+                  android:id="@+id/mPass"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:layout_marginTop="30dp"
+                  android:hint="password"
+                  android:inputType="textPassword"
+
+        />
+        <Button android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/mLog"
+
+                android:layout_marginTop="30dp"
+                android:text="login"
+                android:textAllCaps="false"
+        />
+
+    </LinearLayout>
+
+</RelativeLayout>
+</layout>
