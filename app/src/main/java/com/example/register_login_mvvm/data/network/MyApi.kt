@@ -22,6 +22,14 @@ interface MyApi {
     ) : Response<AuthResponse>
 
 
+    @FormUrlEncoded
+    @POST("createuser")
+    suspend fun userregister(
+        @Field("name") username: String,
+        @Field("email") email: String,
+        @Field("password") password: String
+    ): Response<AuthResponse>
+
     companion object{
         operator fun invoke(
             networkConnectionInterceptor : NetworkConnectionInterceptor
@@ -32,7 +40,7 @@ interface MyApi {
                 .build()
             return Retrofit.Builder()
                 .client(okkHttpClient)
-                .baseUrl("http://192.168.0.21/MyApi/public/")
+                .baseUrl("http://192.168.1.49/MyApi/public/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(MyApi ::class.java)

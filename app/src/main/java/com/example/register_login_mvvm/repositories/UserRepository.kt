@@ -15,6 +15,10 @@ suspend fun userLogin(email : String, password: String): AuthResponse{
     return apiRequest{api.userLogin(email,password)}
 }
 
+
+    suspend fun userRegister(email: String,name: String,password: String): AuthResponse{
+        return apiRequest { api.userregister(name,email,password) }
+    }
     suspend fun saveUser(user: User) = db.getUserDao().upsert(user)
 
     fun getUser() = db.getUserDao().getuser()
