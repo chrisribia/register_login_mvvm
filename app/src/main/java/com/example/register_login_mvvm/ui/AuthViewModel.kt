@@ -3,8 +3,14 @@ package com.example.register_login_mvvm.ui
 import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModel
+import com.example.register_login_mvvm.repositories.UserRepository
+import com.example.register_login_mvvm.utils.ApiException
+import com.example.register_login_mvvm.utils.Couroutines
+import com.example.register_login_mvvm.utils.NoInternetException
 
-class AuthViewModel : ViewModel() {
+class AuthViewModel(
+    val repository : UserRepository
+) : ViewModel() {
     var  email : String? = null
     var password : String? = null
     var username: String? = null
@@ -13,16 +19,30 @@ class AuthViewModel : ViewModel() {
     var authListener : AuthListener? = null
 
     fun onLoginClickButton(view : View){
-        authListener?.onStarted("started")
+        authListener?.onStarted()
         if (email.isNullOrEmpty() || password.isNullOrEmpty()){
            authListener?.onFailure("please enter a valid email or password")
             return
         }
-        authListener?.onSuccess("welcome home")
+        Couroutines.main {
+            try {
+
+                val authResponse = repository.userLogin(email!!, password!!)
+                authResponse.user?.let {
+                    authListener?.onSuccess(it)
+                    repository.saveUser(it)
+                    return@main
+                }
+                authListener?.onFailure(authResponse.message!!!!)
+            }catch (e: ApiException){
+                authListener?.onFailure(e.message!!)
+            }catch (e: NoInternetException){
+                authListener?.onFailure(e.message!!)
+            }
     }
 
     fun onRegisterClickButton(view : View){
-        authListener?.onStarted("register started")
+        authListener?.onStarted()
         if (email.isNullOrEmpty()){
             authListener?.onFailure("please enter email address")
             return
@@ -41,7 +61,9 @@ class AuthViewModel : ViewModel() {
             return
         }
 
-        authListener?.onSuccess("register successful")
+
+        }
+
     }
 
     fun regLink(view: View){

@@ -9,6 +9,7 @@
         />
     </data>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/root_layout"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
         android:layout_width="match_parent"
@@ -60,6 +61,14 @@
         />
 
     </LinearLayout>
+
+
+    <ProgressBar
+            android:visibility="invisible"
+            android:id="@+id/progress_bar"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
