@@ -43,6 +43,7 @@ class AuthViewModel(
                 authListener?.onFailure(e.message!!)
             }
     }
+  }
 
     fun onRegisterClickButton(view : View){
         authListener?.onStarted()
@@ -63,29 +64,28 @@ class AuthViewModel(
             authListener?.onFailure("password doesn'match")
             return
         }
-            Couroutines.main {
-                try {
-                    val authResponse = repository.userRegister(username!!,email!!,password!!)
-                    authResponse?.user?.let {
-                        authListener?.onSuccess(it)
-                        repository.saveUser(it)
-                        return@main
-                    }
-                    authListener?.onFailure(authResponse?.message!!)
+        Couroutines.main {
+            try {
+                val authResponse = repository.userRegister(username!!,email!!,password!!)
+                authResponse?.user?.let {
+                    authListener?.onSuccess(it)
+                    repository.saveUser(it)
+                    return@main
                 }
-                catch (e: ApiException ){
-                    authListener?.onFailure(e.message!!)
-                }
-                catch (e: NoInternetException){
-                    authListener?.onFailure(e.message!!)
-                }
-
-                
+                authListener?.onFailure(authResponse?.message!!)
             }
+            catch (e: ApiException ){
+                authListener?.onFailure(e.message!!)
+            }
+            catch (e: NoInternetException){
+                authListener?.onFailure(e.message!!)
+            }
+
 
         }
 
     }
+
 
     fun regLink(view: View){
         Intent(view.context,RegisterActivity::class.java).also {
