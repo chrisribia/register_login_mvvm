@@ -56,7 +56,6 @@
                   android:textAlignment="center"
                   android:textColor="@android:color/holo_blue_light"
                   android:text="not registered yet? \n Click here to register please \n Thankyou!"
-                  android:onClick="@{viewmodel::regLink}"
 
         />
 

@@ -16,14 +16,14 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 
-class RegisterActivity : AppCompatActivity(),AuthListener, KodeinAware {
+class SingupActivity : AppCompatActivity(),AuthListener, KodeinAware {
 
     override val kodein by kodein()
 
     private val factory: AuthViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+        super.onCreate(savedInstanceState) 
 
         val binding : ActivityRegisterBinding = DataBindingUtil.setContentView(this, R.layout.activity_register)
         val viewModel = ViewModelProviders.of(this,factory).get(AuthViewModel :: class.java)
